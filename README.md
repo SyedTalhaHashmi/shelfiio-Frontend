@@ -15,7 +15,7 @@ A modern book management application built with React, TypeScript, and Vite. Tra
 
 - Node.js (v18 or higher)
 - npm (comes with Node.js)
-- A backend API server running (see Backend URL configuration below)
+- A backend API server running (see and check Backend URL configuration below)
 
 ## Installation
 
