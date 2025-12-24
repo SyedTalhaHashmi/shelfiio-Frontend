@@ -1,73 +1,155 @@
-# Welcome to your Lovable project
+# Shelfio - Book Management Application
 
-## Project info
+A modern book management application built with React, TypeScript, and Vite. Track your reading progress, manage collections, and organize your personal library.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- 📚 **Library Management**: Add, view, and manage your book collection
+- 📖 **Reading Progress**: Track pages read and reading status
+- ⭐ **Reviews & Ratings**: Rate and review your books
+- 📁 **Collections**: Organize books into custom collections
+- 🔍 **Search & Filter**: Find books by title, author, category, or status
+- 📊 **Statistics**: View your reading statistics and progress
 
-There are several ways of editing your application.
+## Prerequisites
 
-**Use Lovable**
+- Node.js (v18 or higher)
+- npm (comes with Node.js)
+- A backend API server running (see Backend URL configuration below)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Installation
 
-Changes made via Lovable will be committed automatically to this repo.
+1. **Clone the repository**
+   ```bash
+   git clone <YOUR_GIT_URL>
+   ```
 
-**Use your preferred IDE**
+2. **Navigate to the project directory**
+   ```bash
+   cd shelfoo
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3. **Install dependencies**
+   ```bash
+   npm i
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+4. **Create environment file**
+   ```bash
+   # Create a .env file in the root directory
+   touch .env
+   ```
 
-Follow these steps:
+5. **Configure environment variables**
+   
+   Open the `.env` file and add your backend API URL:
+   ```env
+   VITE_API_BASE_URL=http://localhost:3000
+   ```
+   
+   Replace `http://localhost:3000` with your actual backend API URL.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+6. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+7. **Open your browser**
+   
+   The application will be available at `http://localhost:5173` (or the port shown in your terminal)
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Environment Variables
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+Create a `.env` file in the root directory with the following variable:
+
+```env
+VITE_API_BASE_URL=your_backend_api_url_here
 ```
 
-**Edit a file directly in GitHub**
+**Example:**
+```env
+VITE_API_BASE_URL=http://localhost:3000
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Or for production:
+```env
+VITE_API_BASE_URL=https://api.yourdomain.com
+```
 
-**Use GitHub Codespaces**
+> **Note**: If `VITE_API_BASE_URL` is not set, the app will use relative URLs (assuming the API is on the same domain).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Available Scripts
 
-## What technologies are used for this project?
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint to check code quality
 
-This project is built with:
+## Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+shelfoo/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions and helpers
+│   ├── types/          # TypeScript type definitions
+│   └── assets/         # Static assets
+├── public/             # Public static files
+├── .env               # Environment variables (create this file)
+└── package.json       # Project dependencies
+```
 
-## How can I deploy this project?
+## Technologies Used
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling
+- **shadcn/ui** - UI component library
+- **React Router** - Routing
+- **Lucide React** - Icons
 
-## Can I connect a custom domain to my Lovable project?
+## API Endpoints
 
-Yes, you can!
+The application expects the following API endpoints:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- `GET /api/books` - Get all books
+- `GET /api/books/latest` - Get latest book
+- `GET /api/books/recent` - Get recent books
+- `GET /api/books/count` - Get total book count
+- `POST /api/books` - Create a new book
+- `PUT /api/books/{id}/pages-read` - Update pages read
+- `PUT /api/books/{id}/status` - Update book status
+- `POST /api/books/{id}/review` - Add/update review
+- `DELETE /api/books/{id}` - Delete a book
+- `GET /api/collections` - Get all collections
+- `POST /api/collections` - Create a collection
+- `DELETE /api/collections/{id}` - Delete a collection
+- `POST /api/collections/{id}/books/{bookId}` - Add book to collection
+- `DELETE /api/collections/{id}/books/{bookId}` - Remove book from collection
+- `GET /api/stats/pages-read` - Get pages read statistics
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Development
+
+1. Make sure your backend API is running
+2. Update the `.env` file with the correct backend URL
+3. Run `npm run dev` to start the development server
+4. Make changes and see them hot-reload in the browser
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The production build will be in the `dist/` directory.
+
+## License
+
+This project is private and proprietary.
+
+## Support
+
+For issues or questions, please contact the development team.
