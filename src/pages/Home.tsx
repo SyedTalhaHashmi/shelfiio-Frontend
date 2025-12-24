@@ -31,8 +31,15 @@ interface LatestBookResponse {
     isbn: string;
     status: string;
     pages: number;
+    pagesRead: number;
     publisher: string;
     coverUrl: string;
+    reviews?: Array<{
+      reviewId?: number;
+      rating: number;
+      comment?: string;
+      createdAt?: string;
+    }>;
   } | null;
   timestamp: string;
 }
@@ -47,6 +54,7 @@ interface RecentBooksResponse {
     isbn: string;
     status: string;
     pages: number;
+    pagesRead: number;
     publisher: string;
     coverUrl: string;
   }[];
@@ -124,26 +132,12 @@ const Home = ({ books, stats, onNavigateToLibrary, onNavigateToCollections, onAd
       }
     };
 
-    const fetchPagesRead = async () => {
-      try {
-        const baseURL = import.meta.env.VITE_API_BASE_URL || "";
-        const apiUrl = baseURL ? `${baseURL}/api/stats/pages-read` : "/api/stats/pages-read";
-        const response = await fetch(apiUrl);
-        if (response.ok) {
-          const result: PagesReadResponse = await response.json();
-          if (result.success && result.data) {
-            setTotalPagesRead(result.data.totalPagesRead);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching pages read:", error);
-      }
-    };
+  
     
     fetchLatestBook();
     fetchRecentBooks();
     fetchBooksCount();
-    fetchPagesRead();
+  
   }, []);
 
   return (
@@ -260,7 +254,7 @@ const Home = ({ books, stats, onNavigateToLibrary, onNavigateToCollections, onAd
             <Card className="p-4 text-center">
               <div className="flex flex-col items-center">
                 <BookOpen className="w-6 h-6 text-accent mb-2" />
-                <p className="text-2xl font-heading font-bold">
+                <p className=" md:text-2xl text-xs font-heading font-bold">
                   {latestBook?.title}
                 </p>
                 <p className="text-xs text-muted-foreground">Now Reading</p>
@@ -270,8 +264,9 @@ const Home = ({ books, stats, onNavigateToLibrary, onNavigateToCollections, onAd
               <div className="flex flex-col items-center">
                 <CheckCircle2 className="w-6 h-6 text-success mb-2" />
                 <p className="text-2xl font-heading font-bold">
-                  {totalPagesRead !== null ? totalPagesRead.toLocaleString() : stats.totalPagesRead.toLocaleString()}
-                </p>
+               
+                    {latestBook?.pagesRead}
+                    </p>
                 <p className="text-xs text-muted-foreground">Pages Read</p>
               </div>
             </Card>
